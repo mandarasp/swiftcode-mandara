@@ -11,14 +11,13 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 
 public class NewsAgentService {
-    public NewsAgentResponse getNewsAgentResponse(String query, UUID sessionid) {
-        //return NewsAgentResponse;
-
+    public NewsAgentResponse getNewsAgentResponse(String query, UUID sessionId) {
+        
         NewsAgentResponse newsAgentResponse = new NewsAgentResponse();
         try {
             WSRequest queryRequest=WS.url("https://api.api.ai/api/query");
-            CompletionStage<WSRequest> responsePromise = queryRequest
-            setQueryParameter("v","20150910")
+            CompletionStage<WSResponse> responsePromise = queryRequest
+                    .setQueryParameter("v","20150910")
                     .setQueryParameter("query",query)
                     .setQueryParameter("lang","en")
                     .setQueryParameter("sessionId",sessionId.toString())
@@ -36,7 +35,8 @@ public class NewsAgentService {
         catch(Exception e)
         {
             e.printStackTrace();
-            return NewsAgentResponse;
+            
         }
+        return newsAgentResponse;
     }
 }
