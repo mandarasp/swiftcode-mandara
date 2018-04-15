@@ -31,7 +31,7 @@ public class MessageActor extends UntypedActor {
     private FeedResponse feedResponse = new FeedResponse();
 
 
-    //object of newsAgentService
+    
     //define another actor response
 
     @Override
@@ -44,9 +44,9 @@ public class MessageActor extends UntypedActor {
             out.tell(objectMapper.writeValueAsString(messageObject), self());
             //newsAgentService.getNewsAgentResponse(messageObject.text,UUID.randomUUID());
             String query = newsAgentService.getNewsAgentResponse("Find " + message, UUID.randomUUID()).query;
-            FeedResponse feedresponse = feedservice.getFeedByQuery(newsAgentResponse.query);
+            FeedResponse feedresponse = feedservice.getFeedByQuery(query);
             messageObject.text = (feedResponse.title == null) ? "No results found" : "Showing results for: " + newsAgentResponse.query;
-            messageObject.feedResponse = feedResponse();
+            messageObject.feedResponse = feedResponse;
             messageObject.sender = Message.Sender.BOT;
             out.tell(objectMapper.writeValueAsString(messageObject), self());
         }
@@ -55,9 +55,6 @@ public class MessageActor extends UntypedActor {
 
     }
 
-    private FeedResponse feedResponse() {
-        return feedResponse();
-    }
 
 
 }
