@@ -13,6 +13,11 @@ html body {
     length: 90%;
 }
 
+#message-pane {
+    background-image: url("/assets/images/download.jpg");
+    background-color: #4286f4;
+}
+
 .material -icons {
     font-size: 48px;
 }
